@@ -1,0 +1,168 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('assets/images/FACE\ A\ FACE\ BG\ LISO.png'); /* Substitua pelo nome do seu arquivo de imagem */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+h1, p {
+    color: white;
+    text-align: center;
+    margin-top: 20%;
+}
+
+.Titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px;
+}
+
+.Titulo img {
+    width: auto;
+    height: 260px;
+}
+
+
+/*-------------------*/
+/*-----Carrossel-----*/
+/*-------------------*/
+
+
+.carrossel {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 16px;
+    margin-bottom: 32px;
+    margin-top: 24px;;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease;
+    position: relative;
+    height: 550px;
+}
+
+.slides img {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 32px;
+    margin: 8px;
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+.slides img.active {
+    display: block;
+    position: relative;
+    opacity: 1;
+}
+
+.btn-carousel {
+    position: absolute;
+    top: 90%;
+    transform: translateY(-50%);
+    background-color: #c0f5c3cc; /* pink-200 with opacity */
+    border-radius: 9999px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color 0.3s ease;
+    z-index: 10;
+    border:#07da3c solid 2px;
+}
+
+.btn-carousel:hover {
+    color: #145500; /* pink-700 */
+}
+
+.btn-prev {
+    left: 1.5rem;
+}
+
+.btn-next {
+    right: 1.5rem;
+}
+
+/*----------------*/
+/*----------------*/
+/*----------------*/
+
+
+.TituloDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+}
+
+.TituloDate img {
+    width: auto;
+    height: 360px;
+}
+
+.counter {
+    font-family: "Vidaloka", serif;
+    text-align: center;
+    margin: 24px ;
+    padding: 16px;
+    max-width: 400px;
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #e5b386, #01452a) 1;
+
+}
+
+.counter h2 {
+    font-family: playfair display, serif;
+    font-size: 22px;
+    font-weight: 700;
+    font-style: normal;
+    margin-bottom: 8px;
+    color: #ecf5fd;
+}
+
+.counter p {
+    font-size: 16px;
+    color: #ecf5fd;
+    margin-bottom: 16px;
+}
+
+.counter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Agora são 4 colunas */
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.counter-box {
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #e5b386, #01452a) 1;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counter-box span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ecf5fd;
+}
+
+.counter-box small {
+    font-size: 12px;
+    color: #ecf5fd;
+}
