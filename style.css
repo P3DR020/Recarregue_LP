@@ -44,7 +44,7 @@ h1, p {
     display: flex;
     transition: transform 0.5s ease;
     position: relative;
-    height: 550px;
+    height: 350px;
 }
 
 .slides img {
@@ -97,7 +97,7 @@ h1, p {
 }
 
 /*----------------*/
-/*----------------*/
+/*----Contador----*/
 /*----------------*/
 
 
@@ -110,7 +110,7 @@ h1, p {
 
 .TituloDate img {
     width: auto;
-    height: 360px;
+    height: 260px;
 }
 
 .counter {
@@ -120,6 +120,7 @@ h1, p {
     padding: 16px;
     max-width: 400px;
     border: 2px solid;
+
     border-image: linear-gradient(45deg, #e5b386, #01452a) 1;
 
 }
@@ -141,15 +142,15 @@ h1, p {
 
 .counter-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Agora são 4 colunas */
+    grid-template-columns: repeat(2, 1fr); /* Agora são 4 colunas */
     gap: 12px;
     margin: 16px 0;
+
 }
 
 .counter-box {
     border: 2px solid;
     border-image: linear-gradient(45deg, #e5b386, #01452a) 1;
-    border-radius: 8px;
     padding: 12px;
     display: flex;
     flex-direction: column;
@@ -166,3 +167,45 @@ h1, p {
     font-size: 12px;
     color: #ecf5fd;
 }
+
+
+/*---------------*/
+/*----Divisor----*/
+/*---------------*/
+
+section {
+    height: 80px;
+    color: #333;
+}
+
+.secao-azul {
+    background-color: #3bac56; /* Um tom de azul */
+    /* --- A MÁGICA ACONTECE AQUI --- */
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+}
+
+.secao-base {
+    /* --- AQUI USAMOS A IMAGEM SVG --- */
+    margin: 0px;
+    background-image: url('assets/images/separador/layered-waves-haikei\ \(1\).svg'); /* Caminho para sua imagem SVG */
+    background-repeat: no-repeat; /* Não repete a imagem */
+    background-size: cover; /* Largura total, altura de 100px para a onda */
+    background-position: center; /* Posiciona a imagem na parte inferior */
+}
+.secao-topo {
+    /* --- AQUI USAMOS A IMAGEM SVG --- */
+    margin: 0px;
+    background-image: url('assets/images/separador/layered-waves-haikeicima.svg'); /* Caminho para sua imagem SVG */
+    background-repeat: no-repeat; /* Não repete a imagem */
+    background-size: cover; /* Largura total, altura de 100px para a onda */
+    background-position: bottom; /* Posiciona a imagem na parte inferior */
+}
+/*polygon(): Estamos dizendo ao CSS que a nossa forma de recorte é um polígono.
+
+0 0: Começa no ponto superior esquerdo (x=0, y=0).
+
+100% 0: Vai até o ponto superior direito (x=100%, y=0).
+
+100% 80%: Desce até um ponto na borda direita, mas a 80% da altura (x=100%, y=80%).
+
+0 100%: Termina no ponto inferior esquerdo (x=0, y=100%).*/
