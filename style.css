@@ -169,17 +169,14 @@ h1, p {
 /*----Divisor----*/
 /*---------------*/
 
-section {
-    height: 80px;
-    color: #333;
-}
-
 .secao-verde-topo {
+    height: 80px;
     background-color: #01452a; /* Um tom de verde */
     /* --- A MÁGICA ACONTECE AQUI --- */
     clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
 }
 .secao-verde-base {
+    height: 80px;
     background-color: #01452a; /* Um tom de verde */
     /* --- A MÁGICA ACONTECE AQUI --- */
     clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
