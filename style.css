@@ -343,3 +343,104 @@ h1, p {
     display: block; /* Remove espaço extra abaixo da imagem */
     margin-bottom: -65px; /* Ajusta para que a nuvem se encaixe bem */
 }
+
+
+/*-------------------*/
+/*-----Inscrição-----*/
+/*-------------------*/
+
+.inscricao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    max-width: 600px;
+}
+.inscricao h1 {
+    font-family: "Anton", sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: #ecc8a8; 
+    text-align: center;
+    margin: 0;
+}
+.inscricao h2 {
+    font-family: "Anton", sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    color: #ecf5fd; 
+    text-align: center;
+    margin: -16px 0 16px 0;
+}
+.inscricao img {
+    width: auto;
+    height: 62px;
+    margin-bottom: 16px;
+}
+
+
+/* Container principal para posicionar a seta */
+.scroll-down-container {
+    position: relative; /* Necessário para posicionar as setas dentro dele */
+    width: 24px;
+    height: 40px;
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    margin: 20px auto; /* Apenas para centralizar e dar espaço no exemplo */
+}
+
+/* Estilo base para cada seta (chevron) */
+.chevron {
+    position: absolute;
+    width: 30px; /* Largura da seta */
+    height: 10px; /* Espessura da linha da seta */
+    opacity: 0;
+    
+    /* Aplica a animação */
+    animation: bounce 2.2s infinite ease-in-out;
+    
+    /* Transforma dois retângulos (pseudo-elementos) em um "V" */
+    transform: scale(1);
+}
+
+.chevron::before,
+.chevron::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 51%;
+    background: #ffffff; /* Cor da seta (branco) */
+    border-radius: 3px; /* Bordas levemente arredondadas como na imagem */
+}
+
+.chevron::before {
+    left: 0;
+    transform: skew(0deg, 30deg); /* Inclina a parte esquerda */
+}
+
+.chevron::after {
+    right: 0;
+    width: 50%;
+    transform: skew(0deg, -30deg); /* Inclina a parte direita */
+}
+
+/* Posiciona a segunda seta um pouco abaixo da primeira */
+.chevron:nth-child(2) {
+    top: 12px; /* Espaçamento entre as duas setas */
+    animation-delay: -0.3s; /* Faz a segunda seta animar um pouco depois da primeira */
+}
+
+/* Definição da Animação (Keyframes) */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+}
