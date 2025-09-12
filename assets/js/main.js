@@ -87,3 +87,65 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+
+// Carrossel de Camisas
+document.addEventListener('DOMContentLoaded', function() {
+    const carrosselContainer = document.querySelector('.carrossel-camisas'); // NOVO: Seleciona o container principal
+    const slidesCamisas = document.querySelector('.slides-camisas');
+    const camisaItems = document.querySelectorAll('.slides-camisas .camisa-item');
+    const prevCamisaBtn = document.getElementById('prevCamisaBtn');
+    const nextCamisaBtn = document.getElementById('nextCamisaBtn');
+
+    let currentCamisaIndex = 0;
+    const totalCamisas = camisaItems.length;
+
+    // NOVO: Variáveis para controlar o autoplay
+    let autoPlayInterval;
+    const autoPlayTime = 3000; // Tempo em milissegundos (ex: 3 segundos)
+
+    function updateCamisaCarousel() {
+        const offset = -currentCamisaIndex * 100; // Move por 100% da largura de um item
+        slidesCamisas.style.transform = `translateX(${offset}%)`;
+    }
+    
+    // NOVO: Função que avança para o próximo slide (lógica do botão 'next')
+    function goToNextSlide() {
+        currentCamisaIndex = (currentCamisaIndex < totalCamisas - 1) ? currentCamisaIndex + 1 : 0;
+        updateCamisaCarousel();
+    }
+
+    // NOVO: Funções para iniciar e parar o autoplay
+    function startAutoPlay() {
+        // Limpa qualquer intervalo anterior para evitar múltiplos timers rodando
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(goToNextSlide, autoPlayTime);
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+    // --- Event Listeners dos Botões (com reset do autoplay) ---
+
+    prevCamisaBtn.addEventListener('click', () => {
+        stopAutoPlay(); // Para o automático
+        currentCamisaIndex = (currentCamisaIndex > 0) ? currentCamisaIndex - 1 : totalCamisas - 1;
+        updateCamisaCarousel();
+        startAutoPlay(); // Recomeça a contagem
+    });
+
+    nextCamisaBtn.addEventListener('click', () => {
+        stopAutoPlay(); // Para o automático
+        goToNextSlide(); // Avança para o próximo
+        startAutoPlay(); // Recomeça a contagem
+    });
+
+    // NOVO: Pausa o carrossel quando o mouse está sobre ele
+    carrosselContainer.addEventListener('mouseenter', stopAutoPlay);
+    carrosselContainer.addEventListener('mouseleave', startAutoPlay);
+
+    // Inicializa o carrossel
+    updateCamisaCarousel();
+    startAutoPlay(); // Inicia o autoplay assim que a página carrega
+});
