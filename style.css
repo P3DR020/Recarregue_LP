@@ -84,10 +84,6 @@ h1, p {
     border:#07da3c solid 2px;
 }
 
-.btn-carousel:hover {
-    color: #145500; /* pink-700 */
-}
-
 .btn-prev {
     left: 1.5rem;
 }
@@ -178,34 +174,18 @@ section {
     color: #333;
 }
 
-.secao-azul {
-    background-color: #3bac56; /* Um tom de azul */
+.secao-verde-topo {
+    background-color: #01452a; /* Um tom de verde */
     /* --- A MÁGICA ACONTECE AQUI --- */
     clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
 }
-
-.secao-base {
-    /* --- AQUI USAMOS A IMAGEM SVG --- */
-    margin: 0px;
-    background-image: url('assets/images/separador/layered-waves-haikei\ \(1\).svg'); /* Caminho para sua imagem SVG */
-    background-repeat: no-repeat; /* Não repete a imagem */
-    background-size: cover; /* Largura total, altura de 100px para a onda */
-    background-position: center; /* Posiciona a imagem na parte inferior */
-}
-.secao-topo {
-    /* --- AQUI USAMOS A IMAGEM SVG --- */
-    margin: 0px;
-    background-image: url('assets/images/separador/layered-waves-haikeicima.svg'); /* Caminho para sua imagem SVG */
-    background-repeat: no-repeat; /* Não repete a imagem */
-    background-size: cover; /* Largura total, altura de 100px para a onda */
-    background-position: bottom; /* Posiciona a imagem na parte inferior */
+.secao-verde-base {
+    background-color: #01452a; /* Um tom de verde */
+    /* --- A MÁGICA ACONTECE AQUI --- */
+    clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
 }
 /*polygon(): Estamos dizendo ao CSS que a nossa forma de recorte é um polígono.
-
 0 0: Começa no ponto superior esquerdo (x=0, y=0).
-
 100% 0: Vai até o ponto superior direito (x=100%, y=0).
-
 100% 80%: Desce até um ponto na borda direita, mas a 80% da altura (x=100%, y=80%).
-
 0 100%: Termina no ponto inferior esquerdo (x=0, y=100%).*/
