@@ -149,3 +149,29 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCamisaCarousel();
     startAutoPlay(); // Inicia o autoplay assim que a página carrega
 });
+
+
+
+
+// Fim do código
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Pega o elemento da seta pelo ID que definimos no HTML
+    const scrollArrow = document.getElementById('scroll-down-arrow');
+
+    // Verifica se o elemento existe na página
+    if (scrollArrow) {
+        // Adiciona um "ouvinte" de evento de clique
+        scrollArrow.addEventListener('click', function() {
+            // Rola a página para baixo de forma suave
+            // A distância rolada é a altura da janela de visualização do navegador
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+    }
+});
