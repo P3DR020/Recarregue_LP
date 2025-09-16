@@ -1,54 +1,54 @@
 let slideIndex = 0;
-    const slides = document.querySelectorAll('.slides img');
-    let autoSlideInterval;
+const slides = document.querySelectorAll('.slides img');
+let autoSlideInterval;
 
-    function showSlides(index) {
-      slides.forEach((slide, i) => {
-        slide.style.display = "none";
-        slide.classList.remove('active');
-      });
+function showSlides(index) {
+  slides.forEach((slide, i) => {
+    slide.style.display = "none";
+    slide.classList.remove('active');
+  });
 
-      // Wrap index
-      if (index >= slides.length) {
-        slideIndex = 0;
-      } else if (index < 0) {
-        slideIndex = slides.length - 1;
-      } else {
-        slideIndex = index;
-      }
+  // Wrap index
+  if (index >= slides.length) {
+    slideIndex = 0;
+  } else if (index < 0) {
+    slideIndex = slides.length - 1;
+  } else {
+    slideIndex = index;
+  }
 
-      slides[slideIndex].style.display = "block";
-      slides[slideIndex].classList.add('active');
-    }
+  slides[slideIndex].style.display = "block";
+  slides[slideIndex].classList.add('active');
+}
 
-    function nextSlide() {
-      showSlides(slideIndex + 1);
-    }
+function nextSlide() {
+  showSlides(slideIndex + 1);
+}
 
-    function prevSlide() {
-      showSlides(slideIndex - 1);
-    }
+function prevSlide() {
+  showSlides(slideIndex - 1);
+}
 
-    function resetAutoSlide() {
-      clearInterval(autoSlideInterval);
-      autoSlideInterval = setInterval(nextSlide, 2000);
-    }
+function resetAutoSlide() {
+  clearInterval(autoSlideInterval);
+  autoSlideInterval = setInterval(nextSlide, 2000);
+}
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      nextSlide();
-      resetAutoSlide();
-    });
+document.getElementById('nextBtn').addEventListener('click', () => {
+  nextSlide();
+  resetAutoSlide();
+});
 
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      prevSlide();
-      resetAutoSlide();
-    });
+document.getElementById('prevBtn').addEventListener('click', () => {
+  prevSlide();
+  resetAutoSlide();
+});
 
-    // Show initial slide
-    showSlides(slideIndex);
+// Show initial slide
+showSlides(slideIndex);
 
-    // Start auto slide
-    autoSlideInterval = setInterval(nextSlide, 3000);
+// Start auto slide
+autoSlideInterval = setInterval(nextSlide, 3000);
 
 
 
@@ -90,8 +90,8 @@ setInterval(updateCountdown, 1000);
 
 
 // Carrossel de Camisas
-document.addEventListener('DOMContentLoaded', function() {
-    const carrosselContainer = document.querySelector('.carrossel-camisas'); // NOVO: Seleciona o container principal
+document.addEventListener('DOMContentLoaded', function () {
+    const carrosselContainer = document.querySelector('.carrossel-camisas');
     const slidesCamisas = document.querySelector('.slides-camisas');
     const camisaItems = document.querySelectorAll('.slides-camisas .camisa-item');
     const prevCamisaBtn = document.getElementById('prevCamisaBtn');
@@ -100,25 +100,36 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCamisaIndex = 0;
     const totalCamisas = camisaItems.length;
 
-    // NOVO: Variáveis para controlar o autoplay
+    // --- Variáveis do Autoplay (sem alteração) ---
     let autoPlayInterval;
-    const autoPlayTime = 3000; // Tempo em milissegundos (ex: 3 segundos)
+    const autoPlayTime = 3000;
+
+    // --- NOVAS: Variáveis para controlar o Swipe/Drag ---
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    const swipeThreshold = 50; // Mínimo de pixels para considerar um swipe
 
     function updateCamisaCarousel() {
-        const offset = -currentCamisaIndex * 100; // Move por 100% da largura de um item
+        const offset = -currentCamisaIndex * 100;
         slidesCamisas.style.transform = `translateX(${offset}%)`;
+        slidesCamisas.style.transition = 'transform 0.5s ease-in-out'; // Garante a animação de snap
     }
-    
-    // NOVO: Função que avança para o próximo slide (lógica do botão 'next')
+
     function goToNextSlide() {
         currentCamisaIndex = (currentCamisaIndex < totalCamisas - 1) ? currentCamisaIndex + 1 : 0;
         updateCamisaCarousel();
     }
 
-    // NOVO: Funções para iniciar e parar o autoplay
+    function goToPrevSlide() {
+        currentCamisaIndex = (currentCamisaIndex > 0) ? currentCamisaIndex - 1 : totalCamisas - 1;
+        updateCamisaCarousel();
+    }
+
+    // --- Funções de Autoplay (com pequenas modificações) ---
     function startAutoPlay() {
-        // Limpa qualquer intervalo anterior para evitar múltiplos timers rodando
-        clearInterval(autoPlayInterval);
+        clearInterval(autoPlayInterval); // Limpa timer antigo
         autoPlayInterval = setInterval(goToNextSlide, autoPlayTime);
     }
 
@@ -127,51 +138,111 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Event Listeners dos Botões (com reset do autoplay) ---
-
     prevCamisaBtn.addEventListener('click', () => {
-        stopAutoPlay(); // Para o automático
-        currentCamisaIndex = (currentCamisaIndex > 0) ? currentCamisaIndex - 1 : totalCamisas - 1;
-        updateCamisaCarousel();
-        startAutoPlay(); // Recomeça a contagem
+        stopAutoPlay();
+        goToPrevSlide();
+        startAutoPlay();
     });
 
     nextCamisaBtn.addEventListener('click', () => {
-        stopAutoPlay(); // Para o automático
-        goToNextSlide(); // Avança para o próximo
-        startAutoPlay(); // Recomeça a contagem
+        stopAutoPlay();
+        goToNextSlide();
+        startAutoPlay();
     });
 
-    // NOVO: Pausa o carrossel quando o mouse está sobre ele
-    carrosselContainer.addEventListener('mouseenter', stopAutoPlay);
-    carrosselContainer.addEventListener('mouseleave', startAutoPlay);
+    // --- NOVAS: Funções e Eventos para o Swipe ---
 
-    // Inicializa o carrossel
+    function getPositionX(event) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+
+    function dragStart(event) {
+        isDragging = true;
+        startPos = getPositionX(event);
+        slidesCamisas.style.transition = 'none'; // Remove a transição durante o arraste
+        stopAutoPlay(); // Pausa o autoplay
+        prevTranslate = -currentCamisaIndex * carrosselContainer.offsetWidth;
+    }
+
+    function dragMove(event) {
+        if (isDragging) {
+            const currentPosition = getPositionX(event);
+            currentTranslate = prevTranslate + currentPosition - startPos;
+            slidesCamisas.style.transform = `translateX(${currentTranslate}px)`;
+        }
+    }
+
+    function dragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        const movedBy = currentTranslate - prevTranslate;
+
+        // Decide se muda de slide
+        if (movedBy < -swipeThreshold) { // Swipe para a esquerda
+            goToNextSlide();
+        } else if (movedBy > swipeThreshold) { // Swipe para a direita
+            goToPrevSlide();
+        } else {
+            updateCamisaCarousel(); // Volta para o slide atual se o swipe foi curto
+        }
+
+        startAutoPlay(); // Reinicia o autoplay
+    }
+
+    // Adiciona os event listeners para mouse e toque
+    carrosselContainer.addEventListener('mousedown', dragStart);
+    carrosselContainer.addEventListener('touchstart', dragStart, { passive: true });
+
+    carrosselContainer.addEventListener('mousemove', dragMove);
+    carrosselContainer.addEventListener('touchmove', dragMove, { passive: true });
+
+    carrosselContainer.addEventListener('mouseup', dragEnd);
+    carrosselContainer.addEventListener('mouseleave', dragEnd); // Se o mouse sair da área
+    carrosselContainer.addEventListener('touchend', dragEnd);
+
+
+    // --- Inicialização (sem alteração) ---
     updateCamisaCarousel();
-    startAutoPlay(); // Inicia o autoplay assim que a página carrega
+    startAutoPlay();
 });
 
 
 
+//SETA Q MEXE
+document.addEventListener('DOMContentLoaded', function () {
+  // Pega o elemento da seta pelo ID que definimos no HTML
+  const scrollArrow = document.getElementById('scroll-down-arrow');
 
-// Fim do código
+  // Verifica se o elemento existe na página
+  if (scrollArrow) {
+    // Adiciona um "ouvinte" de evento de clique
+    scrollArrow.addEventListener('click', function () {
+      // Rola a página para baixo de forma suave
+      // A distância rolada é a altura da janela de visualização do navegador
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    });
+  }
+});
 
 
+// Controle de vídeo com botão play/pause
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Pega o elemento da seta pelo ID que definimos no HTML
-    const scrollArrow = document.getElementById('scroll-down-arrow');
+const video = document.getElementById('myVideo');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const videoWrapper = document.querySelector('.video-wrapper');
 
-    // Verifica se o elemento existe na página
-    if (scrollArrow) {
-        // Adiciona um "ouvinte" de evento de clique
-        scrollArrow.addEventListener('click', function() {
-            // Rola a página para baixo de forma suave
-            // A distância rolada é a altura da janela de visualização do navegador
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
-        });
-    }
+playPauseBtn.addEventListener('click', () => {
+  // Verifica se o vídeo está pausado ou terminou
+  if (video.paused || video.ended) {
+    video.play();
+    video.muted = false; // Tira o mudo ao dar play
+    videoWrapper.classList.add('playing');
+  } else {
+    video.pause();
+    videoWrapper.classList.remove('playing');
+  }
 });
