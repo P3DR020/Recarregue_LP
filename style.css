@@ -104,24 +104,25 @@ h1, p {
 }
 
 .TituloDate img {
-    width: auto;
-    height: 260px;
+    /* MUDANÇA: Torna a imagem responsiva */
+    max-width: 100%;
+    height: auto;
+    max-height: 260px; /* Limita a altura máxima se desejar */
 }
 
 .counter {
     font-family: "Vidaloka", serif;
     text-align: center;
-    margin: 24px ;
+    margin: 24px ; 
     padding: 16px;
     max-width: 400px;
     border: 2px solid;
-
-    border-image: linear-gradient(45deg, #ecc8a8, #01452a) 1;
-
+    border-color: #ecf5fd;
+    border-radius: 8px;
 }
 
 .counter h2 {
-    font-family: playfair display, serif;
+    font-family: 'Playfair Display', serif;
     font-size: 22px;
     font-weight: 700;
     font-style: normal;
@@ -129,27 +130,24 @@ h1, p {
     color: #ecf5fd;
 }
 
-.counter p {
-    font-size: 16px;
-    color: #ecf5fd;
-    margin-bottom: 16px;
-}
-
 .counter-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Agora são 4 colunas */
+    /* MUDANÇA PRINCIPAL: Ajustado de 2 para 4 colunas */
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
     margin: 16px 0;
-
+    
 }
 
 .counter-box {
     border: 2px solid;
-    border-image: linear-gradient(45deg, #ecc8a8, #01452a) 1;
+    border-image: linear-gradient(45deg, #01452a, #ecf5fd) 1;
     padding: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Melhora o alinhamento vertical */
+    border-radius: 16px;
 }
 
 .counter-box span {
@@ -195,7 +193,7 @@ h1, p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 24px;
+    margin: 8px 24px 24px 24px;
     padding: 8px;
     border-radius: 16px;
     max-width: 800px;
@@ -272,6 +270,7 @@ h1, p {
     overflow: hidden;
     margin: -50px auto 16px auto;
     border-radius: 16px;
+    
 }
 
 .slides-camisas {
@@ -493,4 +492,96 @@ h1, p {
         transform: translateY(10px);
         opacity: 0;
     }
+}
+
+
+
+/*-------------------*/
+/*-------video-------*/ 
+/*-------------------*/
+
+/* Seu container principal, agora centralizado */
+.video {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px; /* Aumentei para um bom tamanho de vídeo */
+    margin: 20px auto; /* Centraliza na página */
+    padding: 0 15px;
+}
+
+/* Seu estilo de título H1, sem alterações */
+.video h1 {
+    font-family: "Anton", sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: #ecc8a8; 
+    text-align: center;
+    margin: 32px 0 0 0;
+}
+
+/* Seu estilo de título H2, sem alterações */
+.video h2 {
+    font-family: "Anton", sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    color: #ecf5fd; 
+    text-align: center;
+    margin: -16px 0 16px 0;
+}
+
+/* Wrapper que terá a borda e posicionará o botão */
+.video-wrapper {
+    position: relative;
+    width: 100%; /* Faz o wrapper ocupar toda a largura do container .video */
+    border-radius: 15px;
+    overflow: hidden;
+    line-height: 0;
+}
+
+/* Estilo do vídeo para preencher o wrapper */
+.video-wrapper video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Estilo do botão de Play/Pause (sem alterações) */
+.play-pause-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.play-pause-btn:hover {
+    background-color: rgba(1, 69, 42, 0.8);
+}
+
+/* Estilo dos ícones SVG dentro do botão (sem alterações) */
+.play-pause-btn svg {
+    fill: #fff;
+    width: 30px;
+    height: 30px;
+}
+
+/* Lógica de CSS para mostrar/esconder ícones (sem alterações) */
+.play-pause-btn .pause-icon {
+    display: none;
+}
+.video-wrapper.playing .play-icon {
+    display: none;
+}
+.video-wrapper.playing .pause-icon {
+    display: block;
 }
