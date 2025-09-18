@@ -94,20 +94,13 @@ h1, p {
 /*----------------*/
 /*----Contador----*/
 /*----------------*/
-
-
-.TituloDate {
+.saveTheDate {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 8px;
-}
-
-.TituloDate img {
-    /* MUDANÇA: Torna a imagem responsiva */
-    max-width: 100%;
-    height: auto;
-    max-height: 260px; /* Limita a altura máxima se desejar */
+    max-width: 900px; /* Limita a largura para melhor visualização */
+    height: 400px;
+    margin: 24px 0px 24px 0px;
 }
 
 .saveTheDate h1 {
@@ -135,7 +128,7 @@ h1, p {
     padding: 16px;
     max-width: 400px;
     border: 2px solid;
-    border-color: #ecf5fd;
+    border-color: #ecc8a8;
     border-radius: 8px;
 }
 
@@ -159,23 +152,25 @@ h1, p {
 
 .counter-box {
     border: 2px solid;
-    border-image: linear-gradient(45deg, #01452a, #ecf5fd) 1;
+    border-color:#ecc8a8 ;
     padding: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center; /* Melhora o alinhamento vertical */
-    border-radius: 16px;
+    border-radius: 8px;
 }
 
 .counter-box span {
+    font-family: "Anton", sans-serif;
+    font-weight: 300;
     font-size: 24px;
-    font-weight: bold;
     color: #ecf5fd;
 }
 
 .counter-box small {
-    font-size: 12px;
+    font-family: "Anton", sans-serif;
+    font-size: 16px;
     color: #ecf5fd;
 }
 
@@ -279,7 +274,7 @@ h1, p {
 }
 
 .carrossel-camisas {
-    background-image: url('assets/images/fumaca.png');
+    background-image: url('assets/images/fumaça/fumaca.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -315,27 +310,30 @@ h1, p {
     object-fit: contain; /* Redimensiona a imagem para caber sem cortar */
     margin-bottom: 15px;
 }
+/* Container para a animação do leão */
+.leao-animado {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 90px;
+    width: auto;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* A imagem do leão, agora responsável APENAS pela animação */
 .carrossel-camisas-leao {
-    position: absolute;         /* Posiciona o leão em relação ao container pai */
-    bottom: 8px;               /* Distância da parte inferior do container */
-    left: 50%;                  /* Move o início da imagem para o meio do container */
-    transform: translateX(-50%); /* Move a imagem 50% da sua própria largura para a esquerda, centralizando-a perfeitamente */
-    height: 90px;              /* Mantém a altura desejada */
-    width: auto;                /* Deixa a largura se ajustar proporcionalmente */
-    z-index: 5;                 /* Garante que o leão fique acima da fumaça mas abaixo dos botões (que têm z-index: 10) */
-    pointer-events: none;       /* Impede que a imagem do leão bloqueie cliques no carrossel (opcional, mas recomendado) */
-    
-    /* Adiciona a animação do leão aqui */
+    height: 100%; /* Garante que a imagem preencha o container */
     animation: leao-bounce 3s infinite ease-in-out;
 }
 
-/* Definição da Animação (Keyframes) */
 @keyframes leao-bounce {
     0%, 100% {
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
     50% {
-        transform: translateX(-50%) translateY(-5px);
+        transform: translateY(-5px);
     }
 }
 
@@ -598,14 +596,14 @@ h1, p {
 
 /* Mostra o botão ao passar o mouse ou tocar na tela */
 .video-wrapper:hover .play-pause-btn {
-  opacity: 1;
+    opacity: 1;
 }
 
 /* Faz com que o botão desapareça quando o vídeo está tocando */
 .video-wrapper.playing .play-pause-btn {
-  opacity: 0;
+    opacity: 0;
 }
-
+\   
 /* Estilo dos ícones SVG dentro do botão (sem alterações) */
 .play-pause-btn svg {
     fill: #fff;
@@ -635,3 +633,85 @@ h1, p {
     opacity: 1;
     transform: translateY(0);
 }
+
+
+
+
+/*-----------------------*/
+/*------Localização------*/
+/*-----------------------*/
+
+.fumacaTop {
+    width: 100%; /* Garante que a imagem da nuvem ocupe a largura total */
+    height: auto;
+    display: block; /* Remove espaço extra abaixo da imagem */
+    margin-bottom: -200px; /* Ajusta para que a nuvem se encaixe bem */
+    z-index: 5;
+}
+
+.localizacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px; /* Limita a largura para melhor visualização */
+    height: 700px;
+    margin: 0px 0px 24px 0px;
+}
+
+.localizacao h1 {
+    font-family: "Anton", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #ecf5fd; 
+    text-align: center;
+    margin: 0px;
+    z-index: 10;
+}
+.localizacao h2 {
+    font-family: "Anton", sans-serif;
+    font-weight: 500;
+    font-size: 48px;
+    color: #ecc8a8; 
+    text-align: center;
+    margin-top: -16px;
+    margin-bottom: 24px;
+    z-index: 10;
+}
+/* Novo container para o mapa e o ícone */
+.mapa-container {
+    position: relative;
+    margin-top: 16px;
+    width: 100%;
+    display: flex; /* Adicionado para centralizar a imagem do mapa */
+    justify-content: center; /* Centraliza horizontalmente a imagem do mapa */
+}
+
+/* Garante que o ícone de localização fique na frente do mapa */
+.mapa-container a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o ícone */
+    z-index: 15;
+}
+
+.mapa-container img {
+    max-width: 100%; /* Ajuste a largura do mapa */
+    height: auto;
+}
+.iconLocalizacao {
+    width: 120px; /* Ajuste o tamanho do ícone conforme necessário */
+    height: auto;
+    cursor: pointer; /* Indica que é clicável */
+}
+.rodape {
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 60px;
+}
+.rodape img {
+    height: auto;
+    width: 240px;
+    margin-top: 16px;
+}
+
