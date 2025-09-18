@@ -228,21 +228,63 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// ... seu código existente para os carrosséis, contador, etc. ...
+
 // Controle de vídeo com botão play/pause
-
-
 const video = document.getElementById('myVideo');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const videoWrapper = document.querySelector('.video-wrapper');
 
+// Adiciona um evento para o botão de play/pause
 playPauseBtn.addEventListener('click', () => {
-  // Verifica se o vídeo está pausado ou terminou
-  if (video.paused || video.ended) {
-    video.play();
-    video.muted = false; // Tira o mudo ao dar play
-    videoWrapper.classList.add('playing');
-  } else {
-    video.pause();
-    videoWrapper.classList.remove('playing');
-  }
+    if (video.paused || video.ended) {
+        video.play();
+        video.muted = false; // Tira o mudo ao dar play
+        videoWrapper.classList.add('playing');
+    } else {
+        video.pause();
+        videoWrapper.classList.remove('playing');
+    }
+});
+
+// Faz o botão reaparecer quando o vídeo é pausado
+video.addEventListener('pause', () => {
+  videoWrapper.classList.remove('playing');
+});
+
+// Faz o botão reaparecer quando o vídeo termina
+video.addEventListener('ended', () => {
+  videoWrapper.classList.remove('playing');
+});
+
+
+// ===================
+// Animação de Fade-in
+// ===================
+
+// Adiciona a classe 'hidden' a todas as seções que você quer animar
+const sectionsToAnimate = document.querySelectorAll(
+  '.carrossel, .sobreNos, .video, .camisas-secao, .inscricao, .saveTheDate, .links'
+);
+
+sectionsToAnimate.forEach(section => {
+  section.classList.add('hidden');
+});
+
+// Cria um observador
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    // Se a seção está na tela, adicione a classe 'visible'
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  rootMargin: '0px',
+  threshold: 0.1 // Começa a animar quando 10% da seção está visível
+});
+
+// Observa cada seção
+sectionsToAnimate.forEach(section => {
+  observer.observe(section);
 });
