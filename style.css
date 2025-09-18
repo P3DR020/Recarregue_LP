@@ -110,10 +110,28 @@ h1, p {
     max-height: 260px; /* Limita a altura máxima se desejar */
 }
 
+.saveTheDate h1 {
+    font-family: "Anton", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #ecf5fd; 
+    text-align: center;
+    margin: 0px;
+}
+.saveTheDate h2 {
+    font-family: "Anton", sans-serif;
+    font-weight: 500;
+    font-size: 48px;
+    color: #ecc8a8; 
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 24px;
+}
+
 .counter {
     font-family: "Vidaloka", serif;
     text-align: center;
-    margin: 24px ; 
+    margin: 34px ; 
     padding: 16px;
     max-width: 400px;
     border: 2px solid;
