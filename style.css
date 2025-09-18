@@ -306,6 +306,19 @@ h1, p {
     width: auto;                /* Deixa a largura se ajustar proporcionalmente */
     z-index: 5;                 /* Garante que o leão fique acima da fumaça mas abaixo dos botões (que têm z-index: 10) */
     pointer-events: none;       /* Impede que a imagem do leão bloqueie cliques no carrossel (opcional, mas recomendado) */
+    
+    /* Adiciona a animação do leão aqui */
+    animation: leao-bounce 3s infinite ease-in-out;
+}
+
+/* Definição da Animação (Keyframes) */
+@keyframes leao-bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
 }
 
 .btn-carousel-camisas {
@@ -533,7 +546,7 @@ h1, p {
 /* Wrapper que terá a borda e posicionará o botão */
 .video-wrapper {
     position: relative;
-    width: 100%; /* Faz o wrapper ocupar toda a largura do container .video */
+    width: 100%;
     border-radius: 15px;
     overflow: hidden;
     line-height: 0;
@@ -546,7 +559,7 @@ h1, p {
     display: block;
 }
 
-/* Estilo do botão de Play/Pause (sem alterações) */
+/* Esconde o botão por padrão */
 .play-pause-btn {
     position: absolute;
     top: 50%;
@@ -561,11 +574,18 @@ h1, p {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s;
+    transition: opacity 0.3s; /* Adiciona uma transição para o efeito de fade */
+    opacity: 0; /* Começa com o botão invisível */
 }
 
-.play-pause-btn:hover {
-    background-color: rgba(1, 69, 42, 0.8);
+/* Mostra o botão ao passar o mouse ou tocar na tela */
+.video-wrapper:hover .play-pause-btn {
+  opacity: 1;
+}
+
+/* Faz com que o botão desapareça quando o vídeo está tocando */
+.video-wrapper.playing .play-pause-btn {
+  opacity: 0;
 }
 
 /* Estilo dos ícones SVG dentro do botão (sem alterações) */
@@ -584,4 +604,16 @@ h1, p {
 }
 .video-wrapper.playing .pause-icon {
     display: block;
+}
+
+/* ===== ANIMAÇÕES ADICIONADAS ===== */
+.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 0.6s ease-out;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
