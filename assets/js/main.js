@@ -228,7 +228,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// ... seu código existente para os carrosséis, contador, etc. ...
 
 // Controle de vídeo com botão play/pause
 const video = document.getElementById('myVideo');
@@ -264,7 +263,7 @@ video.addEventListener('ended', () => {
 
 // Adiciona a classe 'hidden' a todas as seções que você quer animar
 const sectionsToAnimate = document.querySelectorAll(
-  '.carrossel, .sobreNos, .video, .camisas-secao, .inscricao, .saveTheDate, .links'
+  '.carrossel, .sobreNos, .video, .camisas-secao, .inscricao, .saveTheDate, .links, .localizacao, .footer'
 );
 
 sectionsToAnimate.forEach(section => {
@@ -281,7 +280,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, {
   rootMargin: '0px',
-  threshold: 0.1 // Começa a animar quando 10% da seção está visível
+  threshold: 0.2 // Começa a animar quando 10% da seção está visível
 });
 
 // Observa cada seção
